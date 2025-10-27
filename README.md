@@ -40,4 +40,4 @@ I’m passionate about Data Science, Cloud AI, Web 3.0, and Fintech Innovation, 
 [![](https://visitcount.itsvg.in/api?id=hanscakrawangsa15&icon=0&color=0)](https://visitcount.itsvg.in)
 
 <!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
-![snake gif](https://github.com/hanscakrawangsa15/hanscakrawangsa15/blob/output/github-contribution-grid-snake.svg)
+![snake gif](https://github.com/hanscakrawangsa15/hanscakrawangsa15/blob/output/github-snake-dark.svg)
