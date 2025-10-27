@@ -1,8 +1,8 @@
 ![Header](https://pin.it/5sJfYOBVu)
 
 <h1 align="center">Hi 👋, I'm Hans Cakrawangsa</h1>
-<h3 align="left">I'm **Hans Cakrawangsa**, an Information Systems student at **Sepuluh Nopember Institute of Technology (ITS), Indonesia**.  
-I’m passionate about **Data Science**, **Software Engineering**, and **Fintech Innovation**, focusing on how data and AI can drive smarter, ethical, and scalable digital systems. </h3>
+<h3 align="left">I'm Hans Cakrawangsa, an Information Systems student at Sepuluh Nopember Institute of Technology (ITS), Indonesia.  
+I’m passionate about Data Science, Cloud AI, Web 3.0, and Fintech Innovation, focusing on how data and AI can drive smarter, ethical, and scalable digital systems. </h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=hanscakrawangsa15&label=Profile%20views&color=0e75b6&style=flat" alt="hanscakrawangsa15" /> </p>
 
