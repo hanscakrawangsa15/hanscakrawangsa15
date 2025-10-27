@@ -1,3 +1,5 @@
+![Header](https://pin.it/5sJfYOBVu)
+
 <h1 align="center">Hi 👋, I'm Hans Cakrawangsa</h1>
 <h3 align="center">Currently pursuing a Bachelor's degree in Information Systems at Sepuluh Nopember Institute of Technology (ITS), I am passionate about the intersection of technology, finance, and artificial intelligence. With hands-on experience in data science, software engineering, cloud computing, and trading, I am driven to explore how emerging technologies can transform financial ecosystems. I have developed multiple projects in Java, Python, R, HTML & CSS, and hold 41+ Google Cloud badges. My experiences include curriculum development, software development, and leadership. My long-term goal is to establish a leading fintech company that innovates in financial automation and wealth management. Always open to collaborations, learning opportunities, and discussions about AI, fintech, cloud computing, and data analytics.</h3>
 
