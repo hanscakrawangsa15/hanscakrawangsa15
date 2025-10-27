@@ -1,4 +1,4 @@
-![Header](https://pin.it/5sJfYOBVu)
+![github gif](https://github.com/user-attachments/assets/3918272f-92e0-4eb9-8c49-be0299cc0d7d)
 
 <h1 align="center">Hi 👋, I'm Hans Cakrawangsa</h1>
 <h3 align="left">I'm Hans Cakrawangsa, an Information Systems student at Sepuluh Nopember Institute of Technology (ITS), Indonesia.  
