@@ -1,63 +1,95 @@
 #!/usr/bin/env python3
 """
-Fetch real GitHub contribution data via GraphQL and render assets/contribution.svg
-(arcade score bar + ship shooting animation + real contribution grid).
+Fetch real GitHub contribution + activity data from fully PUBLIC github.com
+pages (contribution calendar page + user Atom feed) and render
+assets/contribution.svg (arcade score bar + ship shooting animation + real
+contribution grid + last active repo + recent commits).
 
-Requires env var GH_TOKEN with at least `read:user` scope (a classic PAT).
-Run: GH_TOKEN=xxx GH_USERNAME=hanscakrawangsa15 python3 scripts/generate_grid.py
+No token/PAT is required at all. GH_TOKEN is accepted but purely optional
+(only used, if ever re-added, to raise api.github.com rate limits).
+
+Run: GH_USERNAME=hanscakrawangsa15 python3 scripts/generate_grid.py
 """
 
 import os
 import sys
 import random
 import json
+import html
 import urllib.request
 
-GH_TOKEN = os.environ.get("GH_TOKEN")
+GH_TOKEN = os.environ.get("GH_TOKEN")  # optional now — only raises API rate limits if provided
 GH_USERNAME = os.environ.get("GH_USERNAME", "hanscakrawangsa15")
 
-if not GH_TOKEN:
-    print("ERROR: GH_TOKEN env var is required (classic PAT with 'read:user' scope).", file=sys.stderr)
-    sys.exit(1)
+def _headers():
+    h = {"Accept": "application/vnd.github+json", "User-Agent": GH_USERNAME}
+    if GH_TOKEN:
+        h["Authorization"] = f"Bearer {GH_TOKEN}"
+    return h
 
-QUERY = """
-query($login: String!) {
-  user(login: $login) {
-    contributionsCollection {
-      contributionCalendar {
-        totalContributions
-        weeks {
-          contributionDays {
-            color
-            contributionCount
-            weekday
-            date
-          }
-        }
-      }
-    }
-  }
-}
-"""
+
+import re
 
 def fetch_contributions():
-    req = urllib.request.Request(
-        "https://api.github.com/graphql",
-        data=json.dumps({"query": QUERY, "variables": {"login": GH_USERNAME}}).encode(),
-        headers={
-            "Authorization": f"Bearer {GH_TOKEN}",
-            "Content-Type": "application/json",
-            "User-Agent": GH_USERNAME,
-        },
-        method="POST",
-    )
+    """Read the PUBLIC contribution calendar page (no auth needed at all —
+    same technique used by the well-known 'snake' contribution action).
+    Returns a list of weeks, each a list of 7 day-dicts compatible with the
+    rest of this script (color/contributionCount/weekday/date)."""
+    url = f"https://github.com/users/{GH_USERNAME}/contributions"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=30) as resp:
-        data = json.loads(resp.read().decode())
-    if "errors" in data:
-        print("GraphQL errors:", data["errors"], file=sys.stderr)
+        html = resp.read().decode()
+
+    total_match = re.search(r'(\d[\d,]*)\s*\n\s*contributions', html)
+    total = int(total_match.group(1).replace(",", "")) if total_match else 0
+
+    cell_re = re.compile(
+        r'data-date="(\d{4}-\d{2}-\d{2})"[^>]*data-level="(\d)"'
+    )
+    cells = cell_re.findall(html)
+    if not cells:
+        # fallback: attribute order can vary, try the reverse order too
+        cell_re2 = re.compile(
+            r'data-level="(\d)"[^>]*data-date="(\d{4}-\d{2}-\d{2})"'
+        )
+        cells = [(d, l) for l, d in cell_re2.findall(html)]
+
+    import datetime
+    days_by_date = {}
+    for date_str, level_str in cells:
+        days_by_date[date_str] = int(level_str)
+
+    if not days_by_date:
+        print("ERROR: could not parse contribution calendar HTML.", file=sys.stderr)
         sys.exit(1)
-    weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
-    total = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["totalContributions"]
+
+    dates_sorted = sorted(days_by_date.keys())
+    first_date = datetime.date.fromisoformat(dates_sorted[0])
+    # align to the Sunday that starts that first date's week
+    start = first_date - datetime.timedelta(days=(first_date.weekday() + 1) % 7)
+
+    last_date = datetime.date.fromisoformat(dates_sorted[-1])
+    total_days = (last_date - start).days + 1
+    total_weeks = (total_days // 7) + 1
+
+    PALETTE_HEX_BY_LEVEL = {0: "#161b22", 1: "#0e4429", 2: "#006d32", 3: "#26a641", 4: "#39d353"}
+
+    weeks = []
+    cur = start
+    for w in range(total_weeks):
+        days = []
+        for d in range(7):
+            date_str = cur.isoformat()
+            level = days_by_date.get(date_str, 0)
+            days.append({
+                "color": PALETTE_HEX_BY_LEVEL[level],
+                "contributionCount": level,  # approximate; exact count not exposed publicly
+                "weekday": d,
+                "date": date_str,
+            })
+            cur += datetime.timedelta(days=1)
+        weeks.append({"contributionDays": days})
+
     return weeks, total
 
 
@@ -79,30 +111,83 @@ def level_for(color_hex, count):
     return 4
 
 
+def _fetch_public_atom_feed():
+    """Fetch the fully-public GitHub activity feed for a user. This is the
+    same kind of endpoint (github.com, not api.github.com) used for the
+    contribution grid — it is NOT subject to the 60 req/hour unauthenticated
+    REST API rate limit, so no token is ever required."""
+    url = f"https://github.com/{GH_USERNAME}.atom"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            return resp.read().decode()
+    except Exception as e:
+        print(f"WARN: could not fetch activity feed ({e})", file=sys.stderr)
+        return None
+
+
 def fetch_last_active_repo():
     """Return (repo_name, pushed_at_iso) for the most recently pushed-to repo,
     excluding the profile repo itself (which always looks 'just pushed' because
-    this very script commits to it)."""
-    req = urllib.request.Request(
-        f"https://api.github.com/users/{GH_USERNAME}/repos?sort=pushed&direction=desc&per_page=10",
-        headers={
-            "Authorization": f"Bearer {GH_TOKEN}",
-            "Accept": "application/vnd.github+json",
-            "User-Agent": GH_USERNAME,
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            repos = json.loads(resp.read().decode())
-    except Exception as e:
-        print(f"WARN: could not fetch repos ({e})", file=sys.stderr)
+    this very script commits to it). Uses the public Atom feed — no token."""
+    xml = _fetch_public_atom_feed()
+    if not xml:
         return None, None
 
-    for r in repos:
-        if r.get("name", "").lower() == GH_USERNAME.lower():
+    entries = re.findall(r'<entry>(.*?)</entry>', xml, re.S)
+    for e in entries:
+        title_m = re.search(r'<title type="html">(.*?)</title>', e)
+        pub_m = re.search(r'<published>(.*?)</published>', e)
+        if not title_m or not pub_m:
+            continue
+        title = html.unescape(title_m.group(1))
+        # title looks like "<user> pushed <repo>" (or "created a branch", "opened a pull request", etc.)
+        m = re.search(r'pushed\s+(\S+)', title)
+        if not m:
+            continue
+        repo_name = m.group(1)
+        if repo_name.lower() == GH_USERNAME.lower():
             continue  # skip the profile repo itself
-        return r.get("name"), r.get("pushed_at")
+        # normalise published "2026-08-25 12:59:34 UTC" -> ISO "2026-08-25T12:59:34Z"
+        pub_raw = pub_m.group(1).replace(" UTC", "").replace(" ", "T") + "Z"
+        return repo_name, pub_raw
     return None, None
+
+
+def fetch_recent_commits(limit=3):
+    """Return up to `limit` most recent individual commits (repo, message, date),
+    parsed from the public Atom activity feed — no token, no api.github.com
+    rate limit."""
+    xml = _fetch_public_atom_feed()
+    if not xml:
+        return []
+
+    entries = re.findall(r'<entry>(.*?)</entry>', xml, re.S)
+    commits = []
+    for e in entries:
+        title_m = re.search(r'<title type="html">(.*?)</title>', e)
+        pub_m = re.search(r'<published>(.*?)</published>', e)
+        content_m = re.search(r'<content type="html">(.*?)</content>', e, re.S)
+        if not (title_m and pub_m and content_m):
+            continue
+        title = html.unescape(title_m.group(1))
+        m = re.search(r'pushed\s+(\S+)', title)
+        if not m:
+            continue
+        repo_name = m.group(1)
+        if repo_name.lower() == GH_USERNAME.lower():
+            continue  # skip the profile repo itself — show real project commits
+        pub_raw = pub_m.group(1).replace(" UTC", "").replace(" ", "T") + "Z"
+        content = html.unescape(content_m.group(1))
+        msgs = re.findall(r'<blockquote>\s*(.*?)\s*</blockquote>', content, re.S)
+        for msg in msgs:
+            msg_clean = re.sub(r'\s+', ' ', msg).strip()[:60]
+            if not msg_clean:
+                continue
+            commits.append((repo_name, msg_clean, pub_raw))
+            if len(commits) >= limit:
+                return commits
+    return commits
 
 
 def relative_time(iso_str):
@@ -120,38 +205,6 @@ def relative_time(iso_str):
     if secs < 86400 * 30:
         return f"{int(secs // 86400)} days ago"
     return dt.strftime("%d %b %Y")
-
-
-def fetch_recent_commits(limit=3):
-    """Return up to `limit` most recent individual commits (repo, message, date),
-    pulled from the public events feed (push events), across all repos."""
-    req = urllib.request.Request(
-        f"https://api.github.com/users/{GH_USERNAME}/events/public?per_page=30",
-        headers={
-            "Authorization": f"Bearer {GH_TOKEN}",
-            "Accept": "application/vnd.github+json",
-            "User-Agent": GH_USERNAME,
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            events = json.loads(resp.read().decode())
-    except Exception as e:
-        print(f"WARN: could not fetch events ({e})", file=sys.stderr)
-        return []
-
-    commits = []
-    for ev in events:
-        if ev.get("type") != "PushEvent":
-            continue
-        repo_name = ev.get("repo", {}).get("name", "").split("/")[-1]
-        created_at = ev.get("created_at")
-        for c in ev.get("payload", {}).get("commits", []):
-            msg = c.get("message", "").split("\n")[0][:60]
-            commits.append((repo_name, msg, created_at))
-            if len(commits) >= limit:
-                return commits
-    return commits
 
 
 def build_svg(weeks, last_repo=None, last_pushed=None, recent_commits=None):
