@@ -1,0 +1,108 @@
+<svg width="1400" height="620" viewBox="0 0 1400 620" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <style>
+    .term-bg { fill: #0b0f19; }
+    .border { fill: none; stroke: #2ee6a6; stroke-width: 2; rx: 14; }
+    .titlebar { fill: #10151f; }
+    .noise { font-family: 'Courier New', monospace; font-size: 11px; fill: #1f6f52; letter-spacing: 1px; }
+    .label { font-family: 'Courier New', monospace; font-size: 15px; fill: #2ee6a6; font-weight: bold; }
+    .value { font-family: 'Courier New', monospace; font-size: 15px; fill: #d7e4ea; }
+    .heading { font-family: 'Courier New', monospace; font-size: 17px; fill: #ffffff; font-weight: bold; }
+    .dim { font-family: 'Courier New', monospace; font-size: 12px; fill: #4a5568; }
+    .prompt { font-family: 'Courier New', monospace; font-size: 13px; fill: #8fa3ad; }
+  </style>
+  <clipPath id="panelClip">
+    <rect x="46" y="150" width="600" height="440" rx="10"/>
+  </clipPath>
+  <linearGradient id="scanGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2ee6a6" stop-opacity="0"/>
+    <stop offset="50%" stop-color="#2ee6a6" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#2ee6a6" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+
+<rect class="term-bg" width="1400" height="620" rx="16"/>
+<rect class="border" x="4" y="4" width="1392" height="612" rx="16"/>
+
+<!-- title bar -->
+<rect class="titlebar" x="4" y="4" width="1392" height="42" rx="14"/>
+<circle cx="34" cy="25" r="6" fill="#ff5f56"/>
+<circle cx="56" cy="25" r="6" fill="#ffbd2e"/>
+<circle cx="78" cy="25" r="6" fill="#27c93f"/>
+<text x="560.0" y="30" class="prompt">hans@forge ~ % ./profile.sh --live</text>
+<text x="1250" y="30" class="dim" fill="#ff5f56">● SCANNING</text>
+
+<!-- left ascii panel -->
+<text x="46" y="130" class="heading">VISUAL.MAP</text>
+<rect x="46" y="150" width="600" height="440" rx="10" fill="#060a12" stroke="#173226"/>
+<g clip-path="url(#panelClip)">
+<text x="54" y="168" class="noise">o...#o:.+..*..o*.*:.:o+.=+..:o:#*=+*:o:*#.......o++..=oo.#.+-o*o</text>
+<text x="54" y="181" class="noise">::..+..=:+o+=+..*.*:+.-*...o:+.+-*=:.#o*.o.++=:.*.=:.oo.:*:*.+.=</text>
+<text x="54" y="194" class="noise">::+.:=.+.::.+*.:+.*#.+-o+*..+*...o.=:..o..=*+::..+++#o-.++:..++.</text>
+<text x="54" y="207" class="noise">.=+:*.-:==:.+.+.+-.:++=-*#..=**#.**:.=..*o..:.*o+**=.#.+o.+:.+--</text>
+<text x="54" y="220" class="noise">...=::+.:#o-o.:.o=...*.o#.o.+=:.+..:o.#*+..:=*:*..+::::...::+o.=</text>
+<text x="54" y="233" class="noise">:=::.#+=:::.:.::.:++:...+:=.o+-*=.=.=..+#+o*+*.#.=*##o+.o++:#+++</text>
+<text x="54" y="246" class="noise">+..+=o=o+*..+*o++.+=:..*o+::o....+:.+o.o+.o.::.+.=*..:+:o-*=:o#*</text>
+<text x="54" y="259" class="noise">:*:#+..o:*o....+*..o#.+*+.+=*o::+.+::=+#*o..+.+o+.+.o.+*.o.+.+.+</text>
+<text x="54" y="272" class="noise">:+::...*-+o:o:=....o*.o:.o#.:=..+o=+#.oo.::o.-:+++*+::.=o:#+#=.:</text>
+<text x="54" y="285" class="noise">*++#.::.:.+o+.:..:+:#..=.#+:oo+:..o+*+*+#+#.....*:..+#=*......*.</text>
+<text x="54" y="298" class="noise">=*o.:+:*++..=+:+.o..*+-.:o:.*++:-+oo#=..o....+*..##+o=:oo=+*o=:.</text>
+<text x="54" y="311" class="noise">.+#*..oo=*+..++..=:*=-o..:+o=.*o+.++o:+o.=:*+++=+*-o*+.+:o:.*=+o</text>
+<text x="54" y="324" class="noise">.=o..**.-=+.:+#*.:-.*+=*::.:+=*:..*-+.*+**++.o*.:.##:+o:-+.**::+</text>
+<text x="54" y="337" class="noise">*+#+o.+=+oo:::++#::..o=-#+.o:+o=.:.+.**:..:o.=.+...:=o.++*o+.:.+</text>
+<text x="54" y="350" class="noise">+.**-.=o.*o#.o+=.:o+ooo#o:o=o++*#..#..*=*=:.:+:#+.=.=:#==:+:.*+o</text>
+<text x="54" y="363" class="noise">o*:=...:*=..:=++.=++.:.+o#=+#.+.++=.++=:.o*=++..:+oo*.:..*.:..:+</text>
+<text x="54" y="376" class="noise">.=.:....o..:.+..#*#+:*.*=.::*+=.++o+=..o..o*+-*+o.#:o:#.+.+++.+o</text>
+<text x="54" y="389" class="noise">+.=.:..#:***+.+o::#=o+*.o..:+:*::=:oo.=:..#++.:*+.o.#.+++#:*...o</text>
+<text x="54" y="402" class="noise">o.o++.:.+.o+o.+*.+...+.#.+#*::.:..=:**#+..+:o:=.:.**++++.*.*=+#:</text>
+<text x="54" y="415" class="noise">:...o:o.:+::+=*oo:o..++..*++.:.::o*+*::+:o++...:+#*..++*.+.++*:o</text>
+<text x="54" y="428" class="noise">..o.#o=:+*.+=o+*=++::o:#o*o+++..=+...:.:::.+:.+.:::.++o.+.#+*+:+</text>
+<text x="54" y="441" class="noise">:+=-+.+*=::..o:*.::.:.=.+=.++..*.-+.=:o:..:o.#+...:*#*..+.+:+.=*</text>
+<text x="54" y="454" class="noise">.*..+o.+o.=.**-*++o-..:+#o:#+.*:.:+oo:.:+....=*-*.:.+::+.+:#:+=+</text>
+<text x="54" y="467" class="noise">+=*:#.o:*+.o+o+o+.:+-.-=.o+:o=.o:..:++*oo=+:**+o..#++*..+-.=+.:+</text>
+<text x="54" y="480" class="noise">:+.o:++.*::#=o:*...:.*+:*o.+-#*::.=o+o+::o.=+=....+#+=::.o*.+**.</text>
+<text x="54" y="493" class="noise">=.o#o:*:..o*o:+o+o.=+:o...++.o+##:=.+*++....+o.:.+*+:+*++.=*=.+.</text>
+<text x="54" y="506" class="noise">+:o+*:+:#:++*.*.*:.-o.=+:+=:.**..+++o*+o.-#.+:*#.:+o=*:#o.+=::*#</text>
+<text x="54" y="519" class="noise">*.oo:.o.=..+.o+:=:#...+o*+.=++:#ooo..*.=...#++=:..o+-:=:..#++.+.</text>
+<text x="54" y="532" class="noise">*=o.o*.o*o.+#.:.*=+=:+.=+o=.**#==.:.=-++===:.*.-.-*+=:+...+..#:*</text>
+<text x="54" y="545" class="noise">:.:::*.o..+...:=+#.oo..++*:#+.=.o...#o+*+*o..::.+#.*.***.+*..*.*</text>
+<text x="54" y="558" class="noise">:+*+.+:#+:#*.+.-=.=.+::=o+-+:=+oo*o+.**#....o**:.+.=#.:+::....*#</text>
+<text x="54" y="571" class="noise">.#+..:.*.:#+*o++.o.+.=:=o++==o:++.+:+:+#:=*=*...o=:.#..oo:.:#*+:</text>
+<text x="54" y="584" class="noise">+=.==.-+.o.=*:+*+.*+.-+:=++*...=*+.++:+oo.:=o+.:.#+=*o..:=o:+:.#</text>
+<text x="54" y="597" class="noise">.*+ooo++.*.*.=.:o:=....*:.+++*-.o:o::.+*...++:*:.*..::+..=:*.=+=</text>
+
+<rect x="46" y="0" width="600" height="16" fill="url(#scanGrad)">
+  <animate attributeName="y" values="150;570;150" dur="6s" repeatCount="indefinite"/>
+</rect>
+</g>
+
+<!-- right system info panel -->
+<text x="680" y="130" class="heading">SYSTEM.INFO</text>
+<rect x="680" y="150" width="674" height="440" rx="10" fill="#060a12" stroke="#173226"/>
+
+<text x="710" y="185" class="label" font-size="20">hans@forge</text>
+
+<text x="710" y="225" class="label">Subject</text><text x="850" y="225" class="value">Hans</text>
+<text x="710" y="252" class="label">Role</text><text x="850" y="252" class="value">AI &amp; Blockchain Enthusiast</text>
+<text x="710" y="279" class="label">Education</text><text x="850" y="279" class="value">Sistem Informasi</text>
+<text x="710" y="306" class="label">Focus</text><text x="850" y="306" class="value">Cloud . AI . Blockchain</text>
+<text x="710" y="333" class="label">Thesis</text><text x="850" y="333" class="value">Bitcoin Price Prediction (LSTM)</text>
+
+<line x1="710" y1="355" x2="1324" y2="355" stroke="#173226"/>
+
+<text x="710" y="390" class="label">Core Lang</text><text x="850" y="390" class="value">Python . SQL . JS</text>
+<text x="710" y="417" class="label">AI / ML</text><text x="850" y="417" class="value">TensorFlow . PyTorch . scikit-learn</text>
+<text x="710" y="444" class="label">Cloud</text><text x="850" y="444" class="value">AWS . GCP . Docker</text>
+<text x="710" y="471" class="label">Blockchain</text><text x="850" y="471" class="value">Solidity . Web3.js . Ethereum</text>
+
+<line x1="710" y1="493" x2="1324" y2="493" stroke="#173226"/>
+
+<text x="710" y="525" class="heading" font-size="15">- Contact</text>
+<text x="710" y="555" class="label">GitHub</text><text x="850" y="555" class="value">hanscakrawangsa15</text>
+<text x="710" y="582" class="dim">LinkedIn / Email / Instagram — see badges below ↓</text>
+
+<circle cx="1305" cy="175" r="5" fill="#2ee6a6">
+  <animate attributeName="opacity" values="1;0.2;1" dur="1.4s" repeatCount="indefinite"/>
+</circle>
+
+</svg>
