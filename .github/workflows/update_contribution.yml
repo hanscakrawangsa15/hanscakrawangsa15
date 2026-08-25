@@ -17,9 +17,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Generate contribution.svg from real GitHub data
+      - name: Generate contribution.svg (100% public data, no token needed)
         env:
-          GH_TOKEN: ${{ secrets.GRAPHQL_TOKEN }}
           GH_USERNAME: hanscakrawangsa15
         run: python3 scripts/generate_grid.py
 
