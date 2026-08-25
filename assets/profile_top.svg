@@ -44,7 +44,7 @@
 <circle cx="34" cy="25" r="6" fill="#ff5f56"/>
 <circle cx="56" cy="25" r="6" fill="#ffbd2e"/>
 <circle cx="78" cy="25" r="6" fill="#27c93f"/>
-<text x="560.0" y="30" class="prompt">hans@forge ~ % ./profile.sh --live</text>
+<text x="560.0" y="30" class="prompt">hanscakrawangsa@forge ~ % ./profile.sh --live</text>
 <text x="1250" y="30" class="dim" fill="#ff5f56">● SCANNING</text>
 
 <text x="46" y="130" class="heading">VISUAL.MAP</text>
@@ -92,30 +92,29 @@
 <text x="680" y="130" class="heading">SYSTEM.INFO</text>
 <rect x="680" y="150" width="674" height="480" rx="10" fill="#060a12" stroke="#173226"/>
 
-<text x="710" y="185" class="label" font-size="20">hans@forge</text>
+<text x="710" y="185" class="label" font-size="20">hanscakrawangsa@forge</text>
 <circle cx="1305" cy="175" r="5" fill="#2ee6a6">
   <animate attributeName="opacity" values="1;0.2;1" dur="1.4s" repeatCount="indefinite"/>
 </circle>
 
-<text x="710" y="222" class="label">Subject</text><text x="850" y="222" class="value">Hans</text>
-<text x="710" y="248" class="label">Role</text><text x="850" y="248" class="value">AI &amp; Blockchain Enthusiast</text>
-<text x="710" y="274" class="label">Education</text><text x="850" y="274" class="value">Sistem Informasi</text>
-<text x="710" y="300" class="label">Focus</text><text x="850" y="300" class="value">Cloud . AI . Blockchain</text>
-<text x="710" y="326" class="label">Thesis</text><text x="850" y="326" class="value">Bitcoin Price Prediction (LSTM)</text>
+<text x="710" y="222" class="label">Subject</text><text x="900" y="222" class="value">Hans Cakrawangsa</text>
+<text x="710" y="248" class="label">Role</text><text x="900" y="248" class="value">AI &amp; Blockchain Enthusiast</text>
+<text x="710" y="274" class="label">Education</text><text x="900" y="274" class="value">Information System</text>
+<text x="710" y="300" class="label">Focus and Interest</text><text x="900" y="300" class="value">Cloud . AI . Blockchain</text>
 
 <line x1="710" y1="345" x2="1324" y2="345" stroke="#173226"/>
 
-<text x="710" y="378" class="label">Core Lang</text><text x="850" y="378" class="value">Python . SQL . JS</text>
-<text x="710" y="404" class="label">AI / ML</text><text x="850" y="404" class="value">TensorFlow . PyTorch . scikit-learn</text>
-<text x="710" y="430" class="label">Cloud</text><text x="850" y="430" class="value">AWS . GCP . Docker</text>
-<text x="710" y="456" class="label">Blockchain</text><text x="850" y="456" class="value">Solidity . Web3.js . Ethereum</text>
+<text x="710" y="378" class="label">Core Lang</text><text x="900" y="378" class="value">Python . SQL . React.js . Typescript</text>
+<text x="710" y="404" class="label">AI / ML</text><text x="900" y="404" class="value">TensorFlow . PyTorch . Vertex AI . sckit-learn</text>
+<text x="710" y="430" class="label">Cloud</text><text x="900" y="430" class="value">AWS . GCP . Docker . Azure</text>
+<text x="710" y="456" class="label">Blockchain</text><text x="900" y="456" class="value">Solidity . Web3.js . Ethereum env . Binance env </text>
 
 <line x1="710" y1="475" x2="1324" y2="475" stroke="#173226"/>
 
 <text x="710" y="508" class="heading" font-size="15">- Contact</text>
-<text x="710" y="536" class="label">GitHub</text><text x="850" y="536" class="value">hanscakrawangsa15</text>
-<text x="710" y="562" class="label">LinkedIn</text><text x="850" y="562" class="value">https://linkedin.com/in/hanscakrawangsa</text>
-<text x="710" y="588" class="label">Instagram</text><text x="850" y="588" class="value">hans.cakrawangsa</text>
-<text x="710" y="614" class="label">Email</text><text x="850" y="614" class="value">hans.cakrawangsa@gmail.com</text>
+<text x="710" y="536" class="label">GitHub</text><text x="900" y="536" class="value">hanscakrawangsa15</text>
+<text x="710" y="562" class="label">LinkedIn</text><text x="900" y="562" class="value">https://linkedin.com/in/hanscakrawangsa</text>
+<text x="710" y="588" class="label">Instagram</text><text x="900" y="588" class="value">hans.cakrawangsa</text>
+<text x="710" y="614" class="label">Email</text><text x="900" y="614" class="value">hans.cakrawangsa@gmail.com</text>
 
 </svg>
